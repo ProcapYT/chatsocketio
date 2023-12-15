@@ -1,0 +1,104 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(58, 58, 58);
+}
+
+input {
+    width: 290px;
+    height: 20px;
+    border-radius: 10px;
+    padding: 7px;
+    font-size: 15px;
+    border: 0;
+    outline: none;
+    margin: 0;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    height: 35px;
+    border-radius: 10px;
+    border: 0;
+    outline: none;
+}
+
+div.messagesBox {
+    background-color: rgb(197, 197, 197);
+    text-align: left;
+    height: 500px;
+    width: 350px;
+    margin-top: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+}
+
+p.message {
+    margin: 20px;
+    padding: 0;
+}
+
+div.usernameForm {
+    background-color: rgb(197, 197, 197);
+    height: 200px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+div.usernameErrorContainer {
+    width: 400px;
+    height: 50px;
+    background-color: rgb(255, 114, 114);
+    color: white;
+    border: 1px solid red;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+h1 {
+    color: white;
+}
+
+div.userNames {
+    background-color: rgb(197, 197, 197);
+    border-radius: 20px;
+    padding: 20px;
+    height: 200px;
+    width: 310px;
+    font-weight: bold;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar, div.messagesBox::-webkit-scrollbar {
+    width: 7px;
+}
+
+html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb, div.messagesBox::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 10px;
+}
+
+html::-webkit-scrollbar-track, body::-webkit-scrollbar-track, div.messagesBox::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+}

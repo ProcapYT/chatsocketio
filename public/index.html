@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="index.css">
+        <title>Chat</title>
+    </head>
+    <body>
+        <div class="usernameMain" id="usernameMain">
+            <div class="usernameErrorContainer" id="usernameErrorContainer"></div>
+            <h1>Username:</h1>
+            <div class="usernameForm">
+                <input type="text" id="usernameInput" placeholder="Enter your username"/>
+                <button id="usernameButton">Enter</button>
+            </div>
+        </div>
+        <div class="mainChat" id="mainChat">
+            <h1>Chat</h1>
+            <div class="messagesBox" id="messagesBox"></div>
+            <div class="chatContainer">
+                <input type="text" id="input" class="messageInput" placeholder="Write your message"/>
+                <button class="sendButton" id="sendButton">Send</button>
+            </div>
+            <h1>Users:</h1>
+            <div id="userNames" class="userNames"></div>
+        </div>
+        
+        <script src="https://kit.fontawesome.com/d96dbf832c.js" crossorigin="anonymous"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="./frontend.js"></script>
+    </body>
+</html>
