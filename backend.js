@@ -56,7 +56,7 @@ io.on("connection", (socket) => {
   
     if (fromUser === toUser) {
       // Si el remitente es el mismo que el destinatario
-      socket.emit("privateMessageError", "No puedes enviarte un mensaje privado a ti mismo");
+      socket.emit("privateMessageError", "You can't send yourself a private message");
     } else if (users[toUser]) {
       const toUserId = users[toUser];
   
@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
       // También enviar el mensaje al remitente
       socket.emit("privateMessage", { fromUser, toUser, privateMessage });
     } else {
-      socket.emit("privateMessageError", "Usuario no encontrado");
+      socket.emit("privateMessageError", "User not found");
     }
   });
 });
