@@ -53,21 +53,24 @@ io.on("connection", (socket) => {
   socket.on("privateMessage", (data) => {
     const { toUser, privateMessage } = data;
     const fromUser = Object.keys(users).find((key) => users[key] === socket.id);
-
-    if (users[toUser]) {
+  
+    if (fromUser === toUser) {
+      // Si el remitente es el mismo que el destinatario
+      socket.emit("privateMessageError", "No puedes enviarte un mensaje privado a ti mismo");
+    } else if (users[toUser]) {
       const toUserId = users[toUser];
-
+  
       // Emitir el mensaje privado al destinatario
       io.to(toUserId).emit("privateMessage", {
         fromUser,
         toUser,
         privateMessage,
       });
-
+  
       // También enviar el mensaje al remitente
       socket.emit("privateMessage", { fromUser, toUser, privateMessage });
     } else {
-      socket.emit("privateMessageError", "User not found");
+      socket.emit("privateMessageError", "Usuario no encontrado");
     }
   });
 });

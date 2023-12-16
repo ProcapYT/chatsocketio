@@ -6,60 +6,89 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    text-align: center;
     background-color: rgb(58, 58, 58);
 }
 
 input {
-    width: 290px;
+    width: 300px;
     height: 20px;
-    border-radius: 10px;
-    padding: 7px;
+    border-radius: 5px;
+    padding: 10px;
     font-size: 15px;
-    border: 0;
+    border: 1px solid #ccc;
     outline: none;
-    margin: 0;
+    margin-bottom: 10px;
 }
 
 button {
-    margin: 0;
-    padding: 0;
     width: 50px;
     height: 35px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 0;
     outline: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
 }
 
-div.messagesBox {
-    background-color: rgb(197, 197, 197);
+div.mainChat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.messagesContainer {
+    display: flex;
+    width: 100%; /* Ancho ajustado */
+}
+
+div.messagesBox,
+div.userNames {
+    background-color: #ddd;
     text-align: left;
-    height: 500px;
-    width: 350px;
+    height: 600px;
+    width: 300px; /* Ancho ajustado */
+    border-radius: 10px;
     margin-top: 20px;
-    border-radius: 20px;
     margin-bottom: 20px;
     overflow-y: auto;
     overflow-x: hidden;
     word-wrap: break-word;
+    padding: 15px;
 }
 
-p.message {
-    margin: 20px;
-    padding: 0;
-}
-
-div.usernameForm {
-    background-color: rgb(197, 197, 197);
+div.userNames {
+    margin-left: 10px; /* Espacio adicional entre messagesBox y userNames */
     height: 200px;
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row; /* Cambiado a row */
+    width: 100%;
+}
+
+h1 {
+    color: white;
+}
+
+.usernameForm {
+    background-color: #ddd;
     width: 400px;
+    height: 200px;
     display: flex;
     justify-content: center;
     text-align: center;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 10px;
+}
+
+button#usernameButton {
+    height: 40px;
+    margin-bottom: 10px;
 }
 
 div.usernameErrorContainer {
@@ -69,24 +98,8 @@ div.usernameErrorContainer {
     color: white;
     border: 1px solid red;
     margin-top: 20px;
-    border-radius: 10px;
-}
-
-h1 {
-    color: white;
-}
-
-div.userNames {
-    background-color: rgb(197, 197, 197);
-    border-radius: 20px;
-    padding: 20px;
-    height: 200px;
-    width: 310px;
-    font-weight: bold;
-    overflow-y: auto;
-    overflow-x: hidden;
-    word-wrap: break-word;
-    text-align: left;
+    border-radius: 5px;
+    text-align: center;
 }
 
 html::-webkit-scrollbar, body::-webkit-scrollbar, div.messagesBox::-webkit-scrollbar {
