@@ -35,7 +35,7 @@ const sendMessage = () => {
 const addUsername = () => {
     if (usernameInput.value) {
         const currentUser = usernameInput.value
-        cleanCurrentUser = currentUser.replace(/\s/g, '').toLowerCase() // Convertir a minúsculas
+        cleanCurrentUser = currentUser.replace(/\s/g, '')
         socket.emit('newUser', cleanCurrentUser)
         usernameInput.value = ''
     }
