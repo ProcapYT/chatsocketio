@@ -58,12 +58,6 @@ usernameButton.addEventListener("click", () => {
   addUsername();
 });
 
-socket.on("message", (data) => {
-  const { user, message } = data;
-
-  messagesBox.innerHTML += `<p class="message"><b>${user}:</b> ${message}</p>`;
-});
-
 socket.on("userList", (users) => {
   userNames.innerHTML = users
     .map(
@@ -93,8 +87,27 @@ socket.on("privateMessageError", (errorMsg) => {
   messagesBox.innerHTML += `<p style="color: red;">${errorMsg}</p>`;
 });
 
-socket.on("privateMessage", (data) => {
-  const { fromUser, privateMessage } = data;
+socket.on("message", (data) => {
+  const { user, message } = data;
 
-  messagesBox.innerHTML += `<p class="message" style="color: rgb(100, 100, 100); font-style: italic;"><b>${fromUser}:</b> ${privateMessage}</p>`;
+  const isCurrentUser = user === cleanCurrentUser;
+
+  const displayName = isCurrentUser ? "You" : user;
+
+  messagesBox.innerHTML += `<p class="message"><b>${displayName}:</b> ${message}</p>`;
+});
+
+socket.on('privateMessage', data => {
+  const { fromUser, toUser, privateMessage } = data;
+  const isCurrentUser = fromUser === cleanCurrentUser;
+
+  let displayMessage = '';
+
+  if (isCurrentUser) {
+      displayMessage = `<p class="message" style="color: rgb(100, 100, 100); font-style: italic;"><b>You to ${toUser}:</b> ${privateMessage}</p>`;
+  } else if (toUser === cleanCurrentUser) {
+      displayMessage = `<p class="message" style="color: rgb(100, 100, 100); font-style: italic;"><b>${fromUser} to You:</b> ${privateMessage}</p>`;
+  }
+
+  messagesBox.innerHTML += displayMessage;
 });
