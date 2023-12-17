@@ -43,6 +43,20 @@ const addUsername = () => {
   }
 };
 
+Notification.requestPermission()
+
+const showNotification = ({message, user}) => {
+  if ('Notification' in window) {
+    const notification = new Notification(user, {
+      body: message
+    })
+
+    notification.onclick = () => {
+      window.open('/')
+    }
+  }
+}
+
 addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     sendMessage();
@@ -95,6 +109,10 @@ socket.on("message", (data) => {
   const displayName = isCurrentUser ? "You" : user;
 
   messagesBox.innerHTML += `<p class="message"><b>${displayName}:</b> ${message}</p>`;
+
+  if(!isCurrentUser) {
+    showNotification({message: message + ':', user: displayName})
+  }
 });
 
 socket.on('privateMessage', data => {
@@ -107,6 +125,7 @@ socket.on('privateMessage', data => {
       displayMessage = `<p class="message" style="color: rgb(100, 100, 100); font-style: italic;"><b>You to ${toUser}:</b> ${privateMessage}</p>`;
   } else if (toUser === cleanCurrentUser) {
       displayMessage = `<p class="message" style="color: rgb(100, 100, 100); font-style: italic;"><b>${fromUser} to You:</b> ${privateMessage}</p>`;
+      showNotification({message: privateMessage, user: `${fromUser} to You:`})
   }
 
   messagesBox.innerHTML += displayMessage;
