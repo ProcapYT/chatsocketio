@@ -111,7 +111,7 @@ socket.on("message", (data) => {
   messagesBox.innerHTML += `<p class="message"><b>${displayName}:</b> ${message}</p>`;
 
   if(!isCurrentUser) {
-    showNotification({message: message + ':', user: displayName})
+    showNotification({message, user: `${displayName}:`})
   }
 });
 
