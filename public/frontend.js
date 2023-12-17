@@ -46,13 +46,16 @@ const addUsername = () => {
 Notification.requestPermission()
 
 const showNotification = ({message, user}) => {
-  if ('Notification' in window) {
+  if (window.require) {
+    const { ipcRenderer } = window.require('electron')
+    ipcRenderer.send('showNotification', {message, user})
+  } else if ('Notification' in window) {
     const notification = new Notification(user, {
       body: message
     })
 
     notification.onclick = () => {
-      window.open('/')
+      open('/')
     }
   }
 }
