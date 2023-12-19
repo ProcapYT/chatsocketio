@@ -156,7 +156,7 @@ io.on("connection", (socket) => {
     }
   });
 
-  // Each 15 miliseconds emits the room and user list
+  // Each second emits the room and user list
   setInterval(() => {
     for (const room in rooms) {
       if (rooms.hasOwnProperty(room)) {
@@ -168,7 +168,7 @@ io.on("connection", (socket) => {
     }
     io.emit("userList", Object.keys(users));
     socket.emit("roomList", Object.keys(rooms));
-  }, 15);
+  }, 1000);
 });
 
 // Listen in the port variable
