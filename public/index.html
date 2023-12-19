@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="shortcut icon" href="favicon.png" type="image/png" />
     <title>Chat</title>
   </head>
 
@@ -22,19 +22,30 @@
       </div>
     </div>
     <div class="mainChat" id="mainChat">
-      <h1>Chat</h1>
-      <div class="messagesContainer">
+      <h1 class="roomTitleChat">Chat</h1>
+      <div class="messagesContainer" id="messagesContainer">
         <div class="messagesBox" id="messagesBox"></div>
-        <div class="userNames" id="userNames"></div>
+        <div class="inputContainer">
+          <input
+            type="text"
+            id="input"
+            class="messageInput"
+            placeholder="Write your message"
+          />
+          <button class="sendButton" id="sendButton">Send</button>
+        </div>
       </div>
-      <div class="inputContainer">
-        <input
-          type="text"
-          id="input"
-          class="messageInput"
-          placeholder="Write your message"
-        />
-        <button class="sendButton" id="sendButton">Send</button>
+      <div class="userNames" id="userNames"></div>
+      <div class="roomContainer">
+        <h2>Create Room:</h2>
+        <div class="createRoomForm">
+          <input type="text" id="newRoomInput" placeholder="Enter room name" />
+          <button id="createRoomButton">Create Room</button>
+        </div>
+      </div>
+      <div class="roomListContainer">
+        <h2>Room List:</h2>
+        <div class="roomList" id="roomList"></div>
       </div>
     </div>
 
