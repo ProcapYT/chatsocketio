@@ -101,7 +101,6 @@ const createRoom = () => {
     if (newRoomName.length <= 10) {
       // Emit a create room event to the backend
       socket.emit("createRoom", { user: cleanCurrentUser, room: newRoomName });
-      socket.emit("joinRoom", { user: cleanCurrentUser, room: newRoomName });
 
       // Clean the input value
       newRoomInput.value = "";
