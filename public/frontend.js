@@ -261,17 +261,30 @@ socket.on("privateMessageError", (errorMsg) => {
 
 // Recive the message event from the backend
 socket.on("message", (data) => {
+  // Get the user and the message
   const { user, message } = data;
 
+  // Detect if is the user that send it
   const isCurrentUser = user === cleanCurrentUser;
-
   const displayName = isCurrentUser ? "You" : user;
 
-  messagesBox.innerHTML += `<p class="message"><b>${displayName}:</b> ${message}</p>`;
+  // Add the user and the message to the messagesBox
+  const paragraph = document.createElement("p");
+  paragraph.classList.add("message");
 
+  const boldElement = document.createElement("b");
+  boldElement.textContent = `${displayName}: `;
+
+  paragraph.appendChild(boldElement);
+
+  paragraph.insertAdjacentText("beforeend", message);
+
+  messagesBox.appendChild(paragraph);
+
+  // Send the notification
   if (!isCurrentUser) {
-    showNotification({ message, user: `${displayName}:` });
-  }
+    showNotification({ user: `${displayName}: `, message });
+  };
 });
 
 // Recive the private message event from the backend
