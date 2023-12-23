@@ -29,7 +29,7 @@ usernameErrorContainer.classList.add("hidden");
 // Create a function to send a message
 const sendMessage = () => {
   // Check if the input has a value
-  if (inputMessage.value) {
+  if (inputMessage.value.trim()) {
     // Private message logic
     const message = inputMessage.value;
     if (message.startsWith("/w ")) {
@@ -165,6 +165,7 @@ addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     sendMessage();
     addUsername();
+    createRoom();
   }
 });
 
