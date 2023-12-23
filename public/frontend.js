@@ -56,7 +56,7 @@ const sendMessage = () => {
 
     // Check if the user is in a room
     if (!currentRoom && !message.startsWith("/w ")) {
-      messagesBox.innerHTML += `<p style="color: red;">You need to join a room first.</p>`;
+      messagesBox.innerHTML += `<p class="message" style="color: red;">You need to join a room first.</p>`;
     }
 
     // Check if the message is /clear to clear the chat
@@ -65,7 +65,7 @@ const sendMessage = () => {
     }
 
     // Scroll to the top when the user sends a message
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    messagesBox.scrollTop = messagesContainer.scrollHeight;
   }
 };
 
@@ -256,7 +256,7 @@ socket.on("joinRoom", (data) => {
 
 // Check if the backend has sent an error message from the private message and showit
 socket.on("privateMessageError", (errorMsg) => {
-  messagesBox.innerHTML += `<p style="color: red;">${errorMsg}</p>`;
+  messagesBox.innerHTML += `<p class="message" style="color: red;">${errorMsg}</p>`;
 });
 
 // Recive the message event from the backend
@@ -285,6 +285,8 @@ socket.on("message", (data) => {
   if (!isCurrentUser) {
     showNotification({ user: `${displayName}: `, message });
   };
+
+  messagesBox.scrollTop = messagesBox.scrollHeight;
 });
 
 // Recive the private message event from the backend

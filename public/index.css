@@ -2,153 +2,249 @@
   box-sizing: border-box;
 }
 
-body,
-html {
-  padding: 0;
-  margin: 0;
+body, html {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: rgb(58, 58, 58);
-  color: #fff;
-  overflow-x: auto;
+  min-height: 100vh;
   overflow-y: auto;
-  text-align: center;
+  overflow-x: auto;
+  background-color: rgb(58, 58, 58);
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.usernameForm {
+  background-color: #ddd;
+  height: 100px;
+  width: 300px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  border-radius: 5px;
 }
 
-.usernameMain,
-.mainChat {
-  width: 100%;
-  max-width: 800px;
+.usernameForm input {
+  width: 200px;
+  height: 40px;
+  padding: 5px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  transition: .6s;
+}
+
+.usernameForm input:hover, .usernameForm input:focus, .usernameForm button:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+.usernameForm button {
+  width: 50px;
+  height: 40px;
+  border: none;
+  outline: none;
+  background-color: #fff;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  transition: .6s;
+}
+
+.usernameErrorContainer {
+  background-color: rgb(255, 114, 114);
+  border: 1px solid red;
+  color: red;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  border-radius: 5px;
+  animation: .6s alternate forwards usernameErrorAnimation;
+  transition: .6s;
 }
 
-.usernameForm,
-.messagesContainer,
-.roomListContainer,
-.userNames {
-  background-color: rgb(200, 200, 200);
-  border-radius: 5px;
-  margin: 10px;
-  padding: 10px;
-  width: 50%;
+.navBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #000;
-}
-
-.createRoomForm {
-  background-color: rgb(200, 200, 200);
-  border-radius: 5px;
-  margin: 10px;
-  padding: 10px;
   width: 100%;
-  color: #000;
+  height: 70px;
+  background-color: #ddd;
+  z-index: 100;
+  border-bottom: 5px solid #000;
 }
 
-div.userNames {
-  height: 200px;
+.messagesBox {
+  background-color: #ddd;
+  width: 300px;
+  height: 400px;
+  margin-top: 100px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   overflow-x: hidden;
   word-wrap: break-word;
   overflow-y: auto;
+  color: #000;
 }
 
-input,
-.messageInput,
-#newRoomInput {
-  width: 100%;
-  height: 30px;
+.inputContainer {
+  width: 300px;
+}
+
+.inputContainer input {
+  width: 220px;
+  height: 40px;
+  padding: 5px;
+  outline: none;
+  border: none;
+  border-bottom-left-radius: 5px;
+  float: left;
+  transition: .6s;
+  background-color: #fff;
+}
+
+.inputContainer button {
+  width: 80px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
   border: none;
   outline: none;
-  transition: 0.6s;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border-bottom-right-radius: 5px;
+  float: right;
+  transition: .6s;
+  background-color: #fff;
 }
 
-button,
-.sendButton,
-#createRoomButton {
-  width: 100%;
-  height: 32px;
-  border: none;
-  outline: none;
-  background: green;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
+.inputContainer input:hover, .inputContainer input:focus, .inputContainer button:hover {
+  background-color: rgb(200, 200, 200);
 }
 
-div.usernameErrorContainer {
-  background-color: rgb(255, 106, 106);
-  border: 1px solid red;
+.message {
+  margin-left: 10px;
+}
+
+.userNames {
+  width: 300px;
+  height: 250px;
+  background-color: #ddd;
+  margin-top: 60px;
   border-radius: 5px;
-  font-weight: bold;
-  margin: 10px;
+  color: #000;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-wrap: break-word;
+}
+
+.roomContainer {
+  width: 300px;
+  height: 150px;
+  background-color: #ddd;
+  color: #000;
   padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.createRoomForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.roomContainer input {
+  width: 200px;
+  height: 40px;
+  margin: 0;
+  padding: 5px;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  transition: .6s;
+}
+
+.roomContainer button {
+  width: 70px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  transition: .6s;
+}
+
+.roomContainer input:hover, .roomContainer input:focus, .roomContainer button:hover {
+  background-color: rgb(200, 200, 200);
 }
 
 .roomListContainer {
-  background-color: rgb(200, 200, 200);
-  border-radius: 5px;
-  margin: 10px;
+  background-color: #ddd;
+  width: 300px;
+  height: 400px;
   padding: 10px;
+  color: #000;
+  border-radius: 5px;
+  margin-top: 20px;
 }
 
 .roomList {
-  max-height: 150px;
+  width: 100%;
+  height: 300px;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
 .roomList button {
-  width: calc(100% - 20px);
-  height: 32px;
+  width: 100%;
+  height: 30px;
+  font-weight: bold;
+  color: #fff;
+  background-color: rgb(29, 133, 29);
   border: none;
   outline: none;
-  background: green;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
   margin-bottom: 10px;
-  cursor: pointer;
+  border-radius: 5px;
+  transition: .6s;
+}
+
+.roomList button:hover {
+  background-color: rgb(18, 99, 18);
 }
 
 .hidden {
   display: none;
 }
 
-div.messagesContainer {
-  flex-grow: 1;
-  height: 500px;
-  overflow-y: auto;
-  justify-content: left;
-  text-align: left;
-  color: black;
-  position: relative;
-}
-
-div.messagesContainer div.inputContainer {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  background-color: rgb(200, 200, 200);
-  padding: 10px;
-  border-radius: 5px;
+@keyframes usernameErrorAnimation {
+  from {
+    width: 0;
+  } to {
+    width: 300px;
+  }
 }
 
 ::-webkit-scrollbar {
   width: 7px;
 }
 
-::-webkit-scrollbar-track {
-  background-color: #eee;
-  border-radius: 5px;
+::-webkit-scrollbar-thumb {
+  background-color: rgb(100, 100, 100);
+  border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: #616161;
-  border-radius: 5px;
+::-webkit-scrollbar-track {
+  background-color: rgb(200, 200, 200);
+  border-radius: 10px;
 }
