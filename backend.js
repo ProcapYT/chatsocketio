@@ -118,6 +118,9 @@ io.on("connection", (socket) => {
       io.emit("roomList", Object.keys(rooms));
       io.to(socket.id).emit("joinRoom", { user, room: cleanRoomName });
       socket.join(cleanRoomName);
+    } else {
+      // Send an error message to the frontend
+      socket.emit("createRoomError", "The room already exists");
     }
   });
 

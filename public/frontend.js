@@ -17,6 +17,8 @@ const usernameErrorContainer = document.querySelector(
 );
 const usernameMain = document.querySelector("#usernameMain");
 const messagesContainer = document.querySelector("#messagesContainer");
+const roomTitleChat = document.querySelector(".roomTitleChat");
+const roomErrorContainer = document.querySelector("#roomError");
 
 // Create variables outside the function
 let cleanCurrentUser = null;
@@ -25,6 +27,7 @@ let currentRoom;
 // Hide the mainchat and the error container
 mainChat.classList.add("hidden");
 usernameErrorContainer.classList.add("hidden");
+roomErrorContainer.classList.add("hidden");
 
 // Create a function to send a message
 const sendMessage = () => {
@@ -84,16 +87,14 @@ const addUsername = () => {
     usernameInput.value = "";
 
     // Set the title to the user
-    document.querySelector(
-      ".roomTitleChat"
-    ).innerText = `Chat - ${cleanCurrentUser}`;
+    roomTitleChat.innerText = `Chat - ${cleanCurrentUser}`;
   }
 };
 
 // Create a create room function
 const createRoom = () => {
   // Get a clean room name
-  const newRoomName = newRoomInput.value.trim();
+  const newRoomName = newRoomInput.value.replace(/ /g, "");
 
   // Check if the room name exists
   if (newRoomName) {
@@ -101,9 +102,14 @@ const createRoom = () => {
     if (newRoomName.length <= 10) {
       // Emit a create room event to the backend
       socket.emit("createRoom", { user: cleanCurrentUser, room: newRoomName });
+      roomErrorContainer.classList.add("hidden");
 
       // Clean the input value
       newRoomInput.value = "";
+    } else {
+      roomErrorContainer.classList.remove("hidden");
+
+      roomErrorContainer.innerText = "The room name is too long";
     }
   }
 };
@@ -152,6 +158,7 @@ const updateRoomList = (rooms) => {
         // Get the room name with the dataset of the button and emit a join room message to the backend
         const roomName = roomButton.dataset.room;
         socket.emit("joinRoom", { user: cleanCurrentUser, room: roomName });
+        roomErrorContainer.classList.add("hidden");
       });
 
       // Create a child with the button to the room list
@@ -184,6 +191,10 @@ createRoomButton.addEventListener("click", () => {
   createRoom();
 });
 
+roomTitleChat.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
 // Check if the backend has sent a userlist event
 socket.on("userList", (users) => {
   // Get the usernames container from the HTML
@@ -195,7 +206,6 @@ socket.on("userList", (users) => {
     while (userNamesContainer.firstChild) {
       userNamesContainer.removeChild(userNamesContainer.firstChild);
     }
-    userNamesContainer.classList.add("hidden");
   } else {
     // Clear existing content
     while (userNamesContainer.firstChild) {
@@ -285,7 +295,7 @@ socket.on("message", (data) => {
   // Send the notification
   if (!isCurrentUser) {
     showNotification({ user: `${displayName}: `, message });
-  };
+  }
 
   messagesBox.scrollTop = messagesBox.scrollHeight;
 });
@@ -305,4 +315,11 @@ socket.on("privateMessage", (data) => {
   }
 
   messagesBox.innerHTML += displayMessage;
+});
+
+// Recive if there has been an error creating a room from the backend
+socket.on("createRoomError", (errorMsg) => {
+  roomErrorContainer.classList.remove("hidden");
+
+  roomErrorContainer.innerText = errorMsg;
 });

@@ -159,6 +159,24 @@ body, html {
   align-items: center;
 }
 
+.roomTitleChat:hover {
+  cursor: pointer;
+}
+
+.roomError {
+  background-color: rgb(255, 114, 114);
+  border: 1px solid red;
+  height: 50px;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  animation: .6s alternate forwards usernameErrorAnimation;
+  transition: .6s;
+  margin-top: 20px;
+}
+
 .roomContainer input {
   width: 200px;
   height: 40px;
